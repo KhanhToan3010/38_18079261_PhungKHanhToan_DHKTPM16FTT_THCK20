@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web_THCK_2022</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <style type="text/css">
+        [class*col-]{
+            border: 1px solid gray;
+        }
+
+        .horizontal-form [class*=col-]{
+			border: none;
+		}
+		span{
+			color:red;
+			font-style: italic;
+		}
+    </style>
+    <script>
+
+        function kiemTraTen(){
+			var regTen = /^[A-Z][a-z]+(\s{1}[A-Z][a-z]+)*$/;
+			var ten = document.getElementById("hoTen").value;
+
+			if(regTen.test(ten)){
+				document.getElementById("txtTen").innerHTML = "";
+				return true;
+			}else{
+				document.getElementById("txtTen").innerHTML = "Họ tên không rỗng phải bắt đầu bằng ký tự in hoa";
+				return false;
+			}
+		}
+
+        function KiemTraClub(){
+            var reqClub = /^[A-Z] +(\s{1}[A-Z][a-z]+)* + [0-9]{1} $/;
+            var clu = document.getElementById("Club").value;
+
+            if(reqClub.test(clu)){
+				document.getElementById("txtClub").innerHTML = "";
+				return true;
+			}else{
+				document.getElementById("txtClub").innerHTML = "Họ tên không rỗng phải bắt đầu bằng ký tự in hoa";
+				return false;
+			}
+        }
+        function kiemTraNgayDen(){
+			var ngayHT = new Date;
+			var ngay = document.getElementById("ngayDen").value;
+			var ngayden = new Date(ngay);
+			if(ngayden.getMonth()+1 > ngayHT.getMonth()+1){
+				document.getElementById("txtNgayDen").innerHTML = "";
+				return true;
+			}
+			else{
+				if(ngayden.getDate() > ngayHT.getDate())
+				{
+					document.getElementById("txtNgayDen").innerHTML = "";
+					return true;
+				}
+				else{
+					document.getElementById("txtNgayDen").innerHTML = "Ngày đến phải lớn hơn ngày hiện tại";
+					return false;
+				}
+			}
+			
+		}
+
+        function KiemTraSoDT(){
+            regphone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+            phone = document.getElementById("soDT").value;
+
+            if(regphone.test(phone)){
+				document.getElementById("txtSdt").innerHTML = "";
+				return true;
+			}else{
+				document.getElementById("txtSdt").innerHTML = "0xx-xxx-xxxx";
+				return false;
+			}
+        }
+		
+        var count = 1;
+
+        function DangKi(){
+            // if(KiemTraTen()==true && KiemTraNgayDen()==true){
+
+            var name = document.getElementById("hoTen").value;
+            var numClother = document.getElementById("soAo").value;
+            var numphone = document.getElementById("soDT").value;
+            var clu = document.getElementById("club").value;
+            var arrdate = document.getElementById("ngayDen").value;
+           
+            var pic = document.getElementById("hinhAnh").value;
+
+            var tb = document.getElementById("tbl");
+            var hang = tb.insertRow(count);
+            var cot0 = hang.insertCell(0);
+            var cot1 = hang.insertCell(1);
+			var cot2 = hang.insertCell(2);
+			var cot3 = hang.insertCell(3);
+			var cot4 = hang.insertCell(4);
+			
+            var cot5 = hang.insertCell(5);
+
+            cot0.innerHTML = name;
+			cot1.innerHTML = numClother;
+			cot2.innerHTML = numphone;
+			cot3.innerHTML = clu;
+			cot4.innerHTML = arrdate;
+
+            cot5.innerHTML = pic;
+
+            count++;
+             }
+
+        // }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <img src="../img/5342_26757831_1785078468231985_4167069921768185278_o.jpg" width="100%">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">18079261_PhungKhanhToan</a></li>
+                <li><a href="#">Sign In</a></li>
+                <li><a href="#">Registe</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="conatiner-fluid" style="border: 1px solid gray;">
+        <div class="row" style="border: 1px solid gray;">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <form class="horizontal-form" id="frm">
+                    <div class="form-group">
+                        <label class="label-control col-xs-3 col-sm-3 col-md-3 col-lg-3">Name</label>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <input type="text" name="" class="form-control" id="hoTen" placeholder="Name" onblur="KiemTraTen()">
+                            <span id="txtTen">(Họ tên không rỗng phải bắt đầu bằng ký tự in hoa)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-control col-xs-3 col-sm-3 col-md-3 col-lg-3">Number Clother</label>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <input type="text" name="" class="form-control" id="soAo" placeholder="Number Clother" onblur="KiemTraSoAo()">
+                            <span id="txtSoAo">số nguyên từ 1 đến 20</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-control col-xs-3 col-sm-3 col-md-3 col-lg-3">Phone</label>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <input type="number" name="" class="form-control" id="soDT" placeholder="Phone Number" onblur="KiemTraSoDT()">
+                            <span id="txtSdt">0xx-xxx-xxxx</span>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label class="label-control col-xs-3 col-sm-3 col-md-3 col-lg-3">Club</label>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <input type="text" name="" class="form-control" id="club" placeholder="club" onblur="KiemTraClub()">
+                            <span id="txtClub">Dùng chữ hoa đầu từ và số (ví dụ: Ha Noi 1) </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-control col-xs-3 col-sm-3 col-md-3 col-lg-3">Arrival Date</label>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <input type="date" name="" class="form-control" id="ngayDen" placeholder="Arrival Date" onblur="KiemTraNgayDen()">
+                            <span id="txtNgayDen">Ngày tập trung sau ngày hiện tại 1 tháng</span>
+                        </div>
+                    </div>
+
+             
+
+                    <div class="form-group">
+                        <label class="label-control col-xs-3 col-sm-3 col-md-3 col-lg-3">Picture</label>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <input type="file" name="" class="form-control" id="hinhAnh" placeholder="Picture">
+                            <span id="txthinhAnh">(*)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <input type="button" name="" class="btn btn-success" value="Register" onclick="DangKi()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+               <img src="../img/1531968178U23VN.png" style="max-width: 320px; margin: 40px;">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+            <h1 style="text-align: center;">Danh Sách Đội Tuyển Bóng Đá Việt Nam</h1>
+            <table class="table table-hover" id="tbl">
+                <tr>
+                    <th>Name</th>
+                    <th>Number Clother</th>
+                    <th>Phone Number</th>
+                    <th>Club</th>
+                    <th>Arrival Date</th>
+               
+                    <th>Picture</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <footer class="row bg-info text-white text-center">
+            <div class="col-md-12">
+                <h3>18079261_PhungKhanhToan_DHKTPM16FTT</h3>
+            </div>
+
+    </footer>
+    </div>
+</body>
+</html>
